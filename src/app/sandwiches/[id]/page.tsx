@@ -2,11 +2,14 @@ import AddToCartButton from "@/components/AddToCartButton";
 import { getMenuItem } from "@/app/api/menu";
 import { notFound } from "next/navigation";
 
-export default async function SandwichPage({
-  params,
-}: Readonly<{
-  params: { id: string };
-}>) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function SandwichPage({ params }: PageProps) {
   const sandwich = await getMenuItem(params.id);
 
   if (!sandwich) {
