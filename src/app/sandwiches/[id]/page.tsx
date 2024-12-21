@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 
 export default async function SandwichPage({
   params,
-}: {
+}: Readonly<{
   params: { id: string };
-}) {
+}>) {
   const sandwich = await getMenuItem(params.id);
 
   if (!sandwich) {
