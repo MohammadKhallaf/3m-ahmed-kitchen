@@ -2,10 +2,9 @@ import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
 import { getMenuItem } from "@/app/api/menu";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
-async function SandwichContent({ id }: { id: string }) {
-  const sandwich = await getMenuItem(id);
+export default async function SandwichPage() {
+  const sandwich = await getMenuItem(1);
 
   if (!sandwich) {
     notFound();
@@ -30,13 +29,5 @@ async function SandwichContent({ id }: { id: string }) {
         <AddToCartButton item={sandwich} />
       </div>
     </div>
-  );
-}
-
-export default function SandwichPage({ params }: { params: { id: string } }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <SandwichContent id={params.id} />
-    </Suspense>
   );
 }
