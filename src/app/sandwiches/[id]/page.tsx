@@ -3,22 +3,13 @@ import AddToCartButton from "@/components/AddToCartButton";
 import { getMenuItem } from "@/app/api/menu";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: Promise<string> };
-}) {
-  return {
-    title: `Sandwich ${params.id}`,
-  };
-}
+type PageProps = {
+  params: Promise<{ id: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
-export default async function SandwichPage({
-  params,
-}: {
-  params: { id: Promise<string> };
-}) {
-  const id = await params.id;
+export default async function SandwichPage(props: PageProps) {
+  const { id } = await props.params;
   const sandwich = await getMenuItem(id);
 
   if (!sandwich) {
