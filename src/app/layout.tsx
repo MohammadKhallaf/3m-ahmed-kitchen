@@ -1,5 +1,7 @@
 import { CartProvider } from "@/components/CartContext";
 import { Cairo } from "next/font/google";
+import Header from "@/components/Header";
+import AnimatedPage from "@/components/AnimatedPage";
 
 import "./globals.css";
 
@@ -18,7 +20,14 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={`${cairo.className} bg-sage-50 text-sage-900`}>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          <div className="min-h-screen bg-sage-50">
+            <Header />
+            <AnimatedPage>
+              <main className="container mx-auto py-8 px-4">{children}</main>
+            </AnimatedPage>
+          </div>
+        </CartProvider>
       </body>
     </html>
   );
